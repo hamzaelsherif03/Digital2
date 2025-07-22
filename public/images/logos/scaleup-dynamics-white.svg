@@ -1,0 +1,17 @@
+<svg width="128" height="32" viewBox="0 0 128 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="scaleup-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EC4899;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Icon - Arrow up chart -->
+  <rect x="0" y="6" width="20" height="20" rx="3" fill="url(#scaleup-gradient)"/>
+  <path d="M5 18L9 14L13 16L17 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M14 10h3v3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Text -->
+  <text x="26" y="12" font-family="system-ui, -apple-system, sans-serif" font-size="7" font-weight="600" fill="white">ScaleUp</text>
+  <text x="26" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="6" font-weight="400" fill="#A1A1AA">Dynamics</text>
+</svg> 

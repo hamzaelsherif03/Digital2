@@ -1,0 +1,249 @@
+I'll provide you with **ready-to-use prompts** that you can copy and execute in sequence. Here are the formatted prompts you can run one by one:
+
+## 🔗 **COPY-PASTE PROMPT CHAIN**
+
+### **PROMPT 1: Design System Foundation**
+```
+Update the design system to standardize border radius and spacing throughout the website:
+
+1. In tailwind.config.ts, replace the current borderRadius section with a consistent scale:
+   - xs: 0.25rem, sm: 0.375rem, md: 0.5rem, lg: 0.75rem, xl: 1rem, 2xl: 1.5rem, 3xl: 2rem
+
+2. Add systematic spacing scale to the extend section:
+   - section-sm: 4rem, section: 6rem, section-lg: 8rem, section-xl: 10rem
+   - container-sm: 1rem, container: 2rem, container-lg: 3rem
+
+3. Update globals.css with responsive container padding variables
+
+4. Find and replace all inconsistent border radius usage (rounded-2xl, rounded-3xl) with standardized classes
+
+5. Replace all py-32 with appropriate section spacing classes (py-section, py-section-lg, etc.)
+
+Show me the updated tailwind.config.ts and any component files that need border radius standardization.
+```
+
+### **PROMPT 2: Icon Consistency System**
+```
+Standardize all icon sizes and styles throughout the website:
+
+1. Create icon size constants: sm (w-4 h-4), md (w-5 h-5), lg (w-6 h-6), xl (w-8 h-8)
+
+2. Audit all Lucide icons across components and standardize their sizing
+
+3. Ensure consistent color classes for icons (text-primary, text-foreground/70)
+
+4. Update all icon usage in these key components:
+   - HeaderNav.tsx
+   - HeroSection.tsx
+   - ServicesSection.tsx
+   - PricingSection.tsx
+   - CTASection.tsx
+   - FooterSection.tsx
+
+5. Show me the updated components with consistent icon implementation.
+```
+
+### **PROMPT 3: Mobile Navigation Enhancement**
+```
+Improve the mobile hamburger menu and add breadcrumb system:
+
+1. In HeaderNav.tsx, make the hamburger button more prominent with:
+   - Larger touch target (min 44px)
+   - Better visual design with proper contrast
+   - Improved hover and active states
+
+2. Create a new Breadcrumb component for navigation
+
+3. Add breadcrumb navigation to these pages:
+   - All accelerator pages
+   - Service detail pages
+   - About page
+   - Contact page
+
+4. Ensure all navigation elements are thumb-friendly (minimum 44px touch targets)
+
+5. Update MobileNav.tsx with better visual hierarchy and accessibility
+
+Show me the updated HeaderNav.tsx, new Breadcrumb component, and example of breadcrumb implementation.
+```
+
+### **PROMPT 4: Hero Mobile Optimization**
+```
+Optimize the hero section for mobile devices:
+
+1. In HeroSection.tsx, implement responsive text scaling:
+   - Mobile: text-4xl md:text-6xl lg:text-8xl xl:text-9xl
+   - Adjust line heights and spacing for mobile
+
+2. In HeroVisual.tsx, reduce animation complexity for mobile:
+   - Disable complex 3D animations on mobile
+   - Simplify particle effects for performance
+   - Add mobile-specific animation variants
+
+3. Add mobile-specific CTAs including "Call Now" button with tel: link
+
+4. Optimize spacing and layout for mobile viewport
+
+5. Add performance optimizations for mobile animations
+
+Show me the updated HeroSection.tsx and HeroVisual.tsx with mobile optimizations.
+```
+
+### **PROMPT 5: Service Section Mobile Grid**
+```
+Improve the service section mobile experience and responsive grid:
+
+1. In ServicesSection.tsx, implement responsive grid layout:
+   - Mobile: grid-cols-1
+   - Tablet: grid-cols-2
+   - Desktop: grid-cols-3
+
+2. Optimize card sizing and spacing for different screen sizes
+
+3. Ensure proper touch targets for mobile interaction
+
+4. Add progressive disclosure for service features on mobile (show fewer features initially)
+
+5. Optimize card animations and hover effects for mobile performance
+
+Show me the updated ServicesSection.tsx with responsive improvements.
+```
+
+### **PROMPT 6: Pricing ROI and Timeline**
+```
+Enhance the pricing section with ROI indicators and timeline information:
+
+1. In PricingSection.tsx, add ROI indicators to each pricing tier:
+   - VELOCITY: "2-3x ROI in 3 months"
+   - SCALE: "4-5x ROI in 6 months" 
+   - TRANSFORM: "10x ROI in 12 months"
+
+2. Add expected project durations for each package:
+   - VELOCITY: "2-4 weeks"
+   - SCALE: "1-3 months"
+   - TRANSFORM: "3-6 months"
+
+3. Include value proposition callouts showing potential savings
+
+4. Add urgency/scarcity messaging: "Limited spots available this quarter"
+
+5. Create comparison tooltips explaining value differences between tiers
+
+Show me the updated PricingSection.tsx with ROI indicators and timeline information.
+```
+
+### **PROMPT 7: Multi-Step Contact Form**
+```
+Transform the contact form into a multi-step form with calendar integration:
+
+1. In ContactForm.tsx, break the current form into 3 steps:
+   - Step 1: Basic Info (name, email, company)
+   - Step 2: Project Details (type, budget, timeline)
+   - Step 3: Scheduling preference
+
+2. Add progress indicator showing current step
+
+3. Add calendar integration option (Calendly embed or similar)
+
+4. Include phone contact option with click-to-call functionality
+
+5. Optimize for mobile with proper keyboard types and better validation
+
+6. Add "Call Now" button as alternative to form submission
+
+Show me the updated ContactForm.tsx with multi-step implementation.
+```
+
+### **PROMPT 8: Contact Form Mobile Enhancement**
+```
+Optimize the contact form specifically for mobile experience:
+
+1. In ContactForm.tsx, implement mobile-friendly improvements:
+   - Larger touch targets for form inputs
+   - Auto-focus and smooth transitions between steps
+   - Smart keyboard types (tel, email, numeric)
+   - Mobile-specific validation with clear error messages
+
+2. Ensure form works with mobile autocomplete
+
+3. Add mobile-optimized layout with better spacing
+
+4. Implement better mobile form validation and error handling
+
+5. Add accessibility improvements for mobile screen readers
+
+Show me the mobile-optimized ContactForm.tsx updates.
+```
+
+### **PROMPT 9: Footer Enhancement**
+```
+Enhance the footer with social media, newsletter, and content features:
+
+1. In FooterSection.tsx, add social media links:
+   - LinkedIn and Twitter with proper B2B positioning
+   - Professional icons and hover effects
+
+2. Add newsletter signup section with email capture
+
+3. Add recent blog posts section linking to insights
+
+4. Include complete contact details:
+   - Phone number with click-to-call
+   - Physical address
+   - Business hours
+
+5. Add links to actual privacy policy and terms pages (create placeholder pages)
+
+6. Implement better mobile layout for footer
+
+Show me the updated FooterSection.tsx and any new components needed.
+```
+
+### **PROMPT 10: Mobile Experience Optimization**
+```
+Implement comprehensive mobile experience improvements across all components:
+
+1. Audit all forms for better mobile keyboard handling and validation
+
+2. Reduce animation complexity across components for mobile performance
+
+3. Ensure all interactive elements meet 44px minimum touch target
+
+4. Add mobile-specific CTAs throughout the site
+
+5. Implement faster loading states and performance optimizations
+
+6. Add mobile-specific navigation patterns and interactions
+
+Show me the key components with mobile experience improvements implemented.
+```
+
+### **PROMPT 11: Conversion Optimization Features**
+```
+Implement conversion optimization and user experience features:
+
+1. Create an onboarding flow component for new visitors
+
+2. Add internal linking system connecting related services and content
+
+3. Implement progressive disclosure patterns to avoid information overload
+
+4. Add exit-intent popup with lead magnet
+
+5. Create urgency and scarcity messaging components
+
+6. Add A/B testing framework setup (tracking components)
+
+Show me the new components and updated existing ones with conversion optimization features.
+```
+
+---
+
+## 🚀 **HOW TO USE THESE PROMPTS**
+
+1. **Copy each prompt exactly as written**
+2. **Run them in sequence** (1 → 2 → 3, etc.)
+3. **Test after each prompt** before moving to the next
+4. **Each prompt is self-contained** and actionable
+
+Start with **PROMPT 1** and work through them systematically. Each one builds on the previous improvements!
