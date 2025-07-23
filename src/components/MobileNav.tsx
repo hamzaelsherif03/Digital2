@@ -169,7 +169,7 @@ export default function MobileNav({ isOpen, setIsOpen }: MobileNavProps) {
 
           {/* Enhanced Mobile Navigation Drawer */}
           <motion.div
-            className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-background/95 backdrop-blur-xl border-l border-primary/20 shadow-2xl z-50 md:hidden"
+            className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-background/98 backdrop-blur-xl border-l border-primary/20 shadow-2xl z-50 md:hidden"
             variants={drawerVariants}
             initial="closed"
             animate="open"
@@ -179,13 +179,13 @@ export default function MobileNav({ isOpen, setIsOpen }: MobileNavProps) {
             aria-label="Mobile navigation menu"
           >
             {/* Enhanced Header */}
-            <div className="flex items-center justify-between p-6 border-b border-primary/20 bg-gradient-to-r from-primary/5 to-transparent">
+            <div className="flex items-center justify-between p-4 sm:p-6 border-b border-primary/20 bg-background/95 backdrop-blur-xl">
               <div className="flex items-center gap-3">
                 <div className="relative">
                   <Logo />
                   <div className="absolute inset-0 bg-primary/20 rounded-full blur-lg opacity-50" />
                 </div>
-                <span className="text-lg font-bold font-headline bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+                <span className="text-base sm:text-lg font-bold font-headline bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
                   DigitalAccel
                 </span>
               </div>
@@ -201,8 +201,8 @@ export default function MobileNav({ isOpen, setIsOpen }: MobileNavProps) {
             </div>
 
             {/* Enhanced Navigation Items */}
-            <nav className="flex-1 overflow-y-auto">
-              <div className="px-6 py-4">
+            <nav className="flex-1 overflow-y-auto bg-background/95 backdrop-blur-xl">
+              <div className="px-4 sm:px-6 py-4">
                 <motion.ul 
                   className="space-y-2"
                   initial="closed"
@@ -218,12 +218,12 @@ export default function MobileNav({ isOpen, setIsOpen }: MobileNavProps) {
                         <div>
                           <button
                             onClick={() => toggleExpanded(item.name)}
-                            className="flex items-center justify-between w-full p-4 text-left rounded-feature hover:bg-primary/10 transition-all duration-300 min-h-[56px] group"
+                            className="flex items-center justify-between w-full p-3 sm:p-4 text-left rounded-feature hover:bg-primary/10 transition-all duration-300 min-h-[48px] sm:min-h-[56px] group"
                             aria-expanded={expandedItems.includes(item.name)}
                             aria-controls={`submenu-${item.name}`}
                           >
                             <div className="flex flex-col items-start">
-                              <span className="font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+                              <span className="text-sm sm:text-base font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
                                 {item.name}
                               </span>
                               {item.description && (
@@ -249,7 +249,7 @@ export default function MobileNav({ isOpen, setIsOpen }: MobileNavProps) {
                                 exit="closed"
                                 className="overflow-hidden"
                               >
-                                <ul className="ml-4 mt-2 space-y-1 border-l border-primary/20 pl-4">
+                                <ul className="ml-3 sm:ml-4 mt-2 space-y-1 border-l border-primary/20 pl-3 sm:pl-4">
                                   {item.children?.map((child, childIndex) => (
                                     <motion.li 
                                       key={child.name}
@@ -259,13 +259,13 @@ export default function MobileNav({ isOpen, setIsOpen }: MobileNavProps) {
                                       <Link
                                         href={child.href}
                                         onClick={handleLinkClick}
-                                        className={`block p-4 rounded-feature transition-all duration-300 min-h-[56px] flex flex-col ${
+                                        className={`block p-3 sm:p-4 rounded-feature transition-all duration-300 min-h-[48px] sm:min-h-[56px] flex flex-col ${
                                           pathname === child.href 
                                             ? 'bg-primary/20 text-primary font-semibold' 
                                             : 'hover:bg-primary/5 hover:text-primary'
                                         }`}
                                       >
-                                        <span className="font-medium">{child.name}</span>
+                                        <span className="text-sm sm:text-base font-medium">{child.name}</span>
                                         {child.description && (
                                           <span className="text-xs text-foreground/60 mt-1">
                                             {child.description}
@@ -283,13 +283,13 @@ export default function MobileNav({ isOpen, setIsOpen }: MobileNavProps) {
                         <Link
                           href={item.href}
                           onClick={handleLinkClick}
-                          className={`block p-4 rounded-feature transition-all duration-300 min-h-[56px] flex flex-col ${
+                          className={`block p-3 sm:p-4 rounded-feature transition-all duration-300 min-h-[48px] sm:min-h-[56px] flex flex-col ${
                             pathname === item.href 
                               ? 'bg-primary/20 text-primary font-semibold' 
                               : 'hover:bg-primary/5 hover:text-primary'
                           }`}
                         >
-                          <span className="font-semibold">{item.name}</span>
+                          <span className="text-sm sm:text-base font-semibold">{item.name}</span>
                           {item.description && (
                             <span className="text-xs text-foreground/60 mt-1">
                               {item.description}
@@ -305,14 +305,14 @@ export default function MobileNav({ isOpen, setIsOpen }: MobileNavProps) {
 
             {/* Enhanced Footer CTA */}
             <motion.div 
-              className="p-6 border-t border-primary/20 bg-gradient-to-r from-primary/5 to-transparent"
+              className="p-4 sm:p-6 border-t border-primary/20 bg-background/95 backdrop-blur-xl"
               variants={menuItemVariants}
               custom={navigationItems.length}
             >
               <div className="space-y-4">
                 <Button 
                   asChild 
-                  className="w-full h-14 text-lg font-semibold bg-primary hover:bg-primary/90 text-primary-foreground rounded-feature shadow-luxury hover:shadow-luxury-lg transition-all duration-300"
+                  className="w-full h-12 sm:h-14 text-base sm:text-lg font-semibold bg-primary hover:bg-primary/90 text-primary-foreground rounded-feature shadow-luxury hover:shadow-luxury-lg transition-all duration-300"
                   size="lg"
                 >
                   <Link 
@@ -324,12 +324,12 @@ export default function MobileNav({ isOpen, setIsOpen }: MobileNavProps) {
                 </Button>
                 
                 {/* Quick Contact Options */}
-                <div className="flex gap-3">
+                <div className="flex gap-2 sm:gap-3">
                   <Button
                     variant="outline"
                     size="sm"
                     asChild
-                    className="flex-1 h-12 border-primary/20 hover:border-primary hover:bg-primary/5 rounded-feature"
+                    className="flex-1 h-10 sm:h-12 border-primary/20 hover:border-primary hover:bg-primary/5 rounded-feature"
                   >
                     <a 
                       href="tel:+1234567890"
@@ -337,7 +337,7 @@ export default function MobileNav({ isOpen, setIsOpen }: MobileNavProps) {
                       className="flex items-center justify-center gap-2"
                     >
                       <Phone className="w-4 h-4" />
-                      <span className="text-sm font-medium">Call</span>
+                      <span className="text-xs sm:text-sm font-medium">Call</span>
                     </a>
                   </Button>
                   
@@ -345,7 +345,7 @@ export default function MobileNav({ isOpen, setIsOpen }: MobileNavProps) {
                     variant="outline"
                     size="sm"
                     asChild
-                    className="flex-1 h-12 border-primary/20 hover:border-primary hover:bg-primary/5 rounded-feature"
+                    className="flex-1 h-10 sm:h-12 border-primary/20 hover:border-primary hover:bg-primary/5 rounded-feature"
                   >
                     <a 
                       href="mailto:hello@digitalaccel.com"
@@ -353,7 +353,7 @@ export default function MobileNav({ isOpen, setIsOpen }: MobileNavProps) {
                       className="flex items-center justify-center gap-2"
                     >
                       <Mail className="w-4 h-4" />
-                      <span className="text-sm font-medium">Email</span>
+                      <span className="text-xs sm:text-sm font-medium">Email</span>
                     </a>
                   </Button>
                 </div>

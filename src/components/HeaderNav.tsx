@@ -24,7 +24,7 @@ export default function HeaderNav() {
     <motion.header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${
         scrolled 
-          ? 'bg-background/80 backdrop-blur-3xl shadow-2xl shadow-black/20 border-b border-primary/10' 
+          ? 'bg-background/95 backdrop-blur-3xl shadow-2xl shadow-black/20 border-b border-primary/10' 
           : 'bg-transparent'
       }`}
       initial={{ y: -100 }}
@@ -36,27 +36,27 @@ export default function HeaderNav() {
         scrolled ? 'opacity-100' : 'opacity-0'
       }`} />
       
-      <div className="container mx-auto px-container py-6">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
         <div className="flex justify-between items-center">
           {/* Logo Section */}
           <motion.div 
-            className="flex items-center gap-4"
+            className="flex items-center gap-2 sm:gap-4"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Link href="/" className="flex items-center gap-4 group">
+            <Link href="/" className="flex items-center gap-2 sm:gap-4 group">
               <div className="relative">
                 <Logo />
                 <div className="absolute inset-0 bg-primary/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700 scale-150" />
               </div>
-              <span className="text-2xl font-bold font-headline bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent group-hover:from-primary group-hover:to-primary transition-all duration-500">
+              <span className="text-lg sm:text-xl lg:text-2xl font-bold font-headline bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent group-hover:from-primary group-hover:to-primary transition-all duration-500">
                 DigitalAccel
               </span>
             </Link>
           </motion.div>
 
           {/* Navigation - Apple-style minimal with enhanced effects */}
-          <nav className="hidden lg:flex items-center gap-12 text-sm font-medium tracking-wide">
+          <nav className="hidden lg:flex items-center gap-8 xl:gap-12 text-sm font-medium tracking-wide">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button className="group relative py-3 px-2 text-foreground/80 hover:text-primary transition-all duration-500">
@@ -92,11 +92,11 @@ export default function HeaderNav() {
           </nav>
 
           {/* CTA Section */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3 sm:gap-6">
             <div className="hidden lg:flex">
               <Button 
                 asChild 
-                className="relative overflow-hidden group bg-gradient-to-r from-primary/10 to-primary/5 hover:from-primary hover:to-primary/80 border border-primary/30 hover:border-primary text-primary hover:text-primary-foreground backdrop-blur-xl transition-all duration-700 hover:scale-105 hover:shadow-luxury rounded-feature px-8 py-3"
+                className="relative overflow-hidden group bg-gradient-to-r from-primary/10 to-primary/5 hover:from-primary hover:to-primary/80 border border-primary/30 hover:border-primary text-primary hover:text-primary-foreground backdrop-blur-xl transition-all duration-700 hover:scale-105 hover:shadow-luxury rounded-feature px-6 xl:px-8 py-3"
               >
                 <Link href="/contact" className="relative z-10 flex items-center gap-2">
                   <span className="relative z-10 font-semibold">Start Accelerating</span>

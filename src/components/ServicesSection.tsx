@@ -47,18 +47,18 @@ const accelerationServices = [
 export default function ServicesSection() {
   const { fadeInUp, staggerContainer } = useAnimationVariants();
   return (
-    <section id="services" className="py-section-large bg-gradient-to-b from-background via-background/95 to-background">
-      <div className="container mx-auto px-container">
+    <section id="services" className="py-16 sm:py-20 lg:py-section-large bg-gradient-to-b from-background via-background/95 to-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: '-100px' }}
           variants={staggerContainer}
-          className="text-center max-w-4xl mx-auto mb-20"
+          className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 lg:mb-20"
         >
           <motion.h2
             variants={fadeInUp}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold font-headline mb-8 tracking-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-headline mb-6 sm:mb-8 tracking-tight"
           >
             Enterprise-Grade
             <span className="block bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent">
@@ -68,7 +68,7 @@ export default function ServicesSection() {
           
           <motion.p
             variants={fadeInUp}
-            className="text-xl md:text-2xl text-foreground/70 leading-relaxed"
+            className="text-lg sm:text-xl md:text-2xl text-foreground/70 leading-relaxed px-4"
           >
             Comprehensive digital solutions engineered to accelerate your business velocity and competitive advantage.
           </motion.p>
@@ -76,7 +76,7 @@ export default function ServicesSection() {
 
         <motion.div
           variants={staggerContainer}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           {accelerationServices.map((service, index) => (
             <motion.div
@@ -85,7 +85,7 @@ export default function ServicesSection() {
               custom={index}
               className="group"
             >
-              <Card className="relative h-full p-8 bg-gradient-to-br from-background/80 via-background/60 to-background/40 backdrop-blur-2xl border border-primary/20 shadow-2xl hover:shadow-luxury transition-all duration-700 hover:scale-105 rounded-showcase overflow-hidden">
+              <Card className="relative h-full p-6 sm:p-8 bg-gradient-to-br from-background/80 via-background/60 to-background/40 backdrop-blur-2xl border border-primary/20 shadow-2xl hover:shadow-luxury transition-all duration-700 hover:scale-105 rounded-showcase overflow-hidden">
                 {/* Background gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 
@@ -93,38 +93,38 @@ export default function ServicesSection() {
                 <div className="relative z-10">
                   {/* Icon with glassmorphism effect */}
                   <motion.div 
-                    className="relative mb-6"
+                    className="relative mb-4 sm:mb-6"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/10 backdrop-blur-xl border border-primary/30 rounded-feature flex items-center justify-center shadow-lg group-hover:shadow-luxury transition-all duration-500">
-                      <service.icon className="w-8 h-8 text-primary" />
+                    <div className="w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-br from-primary/20 to-primary/10 backdrop-blur-xl border border-primary/30 rounded-feature flex items-center justify-center shadow-lg group-hover:shadow-luxury transition-all duration-500">
+                      <service.icon className="w-6 sm:w-8 h-6 sm:h-8 text-primary" />
                     </div>
                     {/* Icon glow effect */}
                     <div className="absolute inset-0 bg-primary/20 rounded-feature blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-700" />
                   </motion.div>
 
                   {/* Service Title */}
-                  <h3 className="text-2xl font-bold font-headline mb-4 text-foreground group-hover:text-primary transition-colors duration-500">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold font-headline mb-3 sm:mb-4 text-foreground group-hover:text-primary transition-colors duration-500">
                     {service.title}
                   </h3>
 
                   {/* Service Description */}
-                  <p className="text-foreground/70 mb-6 leading-relaxed">
+                  <p className="text-sm sm:text-base text-foreground/70 mb-4 sm:mb-6 leading-relaxed">
                     {service.description}
                   </p>
 
                   {/* Features List */}
-                  <ul className="space-y-3">
+                  <ul className="space-y-2 sm:space-y-3">
                     {service.features.map((feature, featureIndex) => (
                       <motion.li
                         key={feature}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: featureIndex * 0.1 }}
-                        className="flex items-center gap-3 text-sm text-foreground/60"
+                        className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-foreground/60"
                       >
-                        <div className="w-2 h-2 rounded-full bg-primary shadow-lg shadow-primary/50" />
+                        <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-primary shadow-lg shadow-primary/50 flex-shrink-0" />
                         {feature}
                       </motion.li>
                     ))}
@@ -146,11 +146,11 @@ export default function ServicesSection() {
           whileInView="show"
           viewport={{ once: true, margin: '-100px' }}
           variants={staggerContainer}
-          className="mt-20 text-center bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 rounded-showcase p-12 backdrop-blur-xl border border-primary/20 shadow-2xl"
+          className="mt-12 sm:mt-16 lg:mt-20 text-center bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 rounded-showcase p-6 sm:p-8 lg:p-12 backdrop-blur-xl border border-primary/20 shadow-2xl"
         >
           <motion.h3
             variants={fadeInUp}
-            className="text-3xl md:text-4xl font-bold font-headline mb-6"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold font-headline mb-4 sm:mb-6"
           >
             Ready to Accelerate Your
             <span className="block bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent">
@@ -160,18 +160,18 @@ export default function ServicesSection() {
           
           <motion.p
             variants={fadeInUp}
-            className="text-xl text-foreground/70 mb-8 max-w-2xl mx-auto"
+            className="text-lg sm:text-xl text-foreground/70 mb-6 sm:mb-8 max-w-2xl mx-auto px-4"
           >
             Let's discuss how our enterprise-grade solutions can accelerate your business velocity and deliver measurable results.
           </motion.p>
 
           <motion.div
             variants={fadeInUp}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
           >
             <a 
               href="/contact?utm_source=website&utm_medium=cta&utm_campaign=conversion&utm_content=services-consultation"
-              className="group relative overflow-hidden bg-primary hover:bg-primary/90 text-primary-foreground px-12 py-6 text-xl font-semibold rounded-full shadow-luxury transition-all duration-500 hover:shadow-luxury-lg hover:scale-105"
+              className="group relative overflow-hidden bg-primary hover:bg-primary/90 text-primary-foreground px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-semibold rounded-full shadow-luxury transition-all duration-500 hover:shadow-luxury-lg hover:scale-105 w-full sm:w-auto max-w-sm sm:max-w-none"
             >
               <span className="relative z-10">Schedule Consultation</span>
               <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
@@ -179,7 +179,7 @@ export default function ServicesSection() {
             
             <a 
               href="/process"
-              className="group px-12 py-6 text-xl font-medium rounded-full hover:bg-primary/5 transition-all duration-300 border border-primary/20 backdrop-blur-xl"
+              className="group px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-medium rounded-full hover:bg-primary/5 transition-all duration-300 border border-primary/20 backdrop-blur-xl w-full sm:w-auto max-w-sm sm:max-w-none"
             >
               View Our Process
             </a>

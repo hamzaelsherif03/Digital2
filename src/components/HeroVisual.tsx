@@ -87,8 +87,8 @@ export default function HeroVisual() {
   };
   
   return (
-    <div className="relative w-full flex justify-center mt-8 md:mt-16 mb-8 md:mb-16">
-      <div className={`w-full max-w-6xl relative ${isMobile ? 'h-[300px]' : 'h-[500px]'} perspective-2000`}>
+    <div className="relative w-full flex justify-center mt-6 sm:mt-8 md:mt-12 lg:mt-16 mb-6 sm:mb-8 md:mb-12 lg:mb-16">
+      <div className={`w-full max-w-6xl relative ${isMobile ? 'h-[250px] sm:h-[300px]' : 'h-[400px] lg:h-[500px]'} perspective-2000`}>
         {/* Main floating geometric shape */}
         <motion.div
           className="absolute inset-0 flex items-center justify-center"
@@ -99,7 +99,7 @@ export default function HeroVisual() {
           {/* Central hexagon with glassmorphism - Mobile Optimized */}
           <motion.div
             className={`relative bg-gradient-to-br from-primary/20 via-primary/10 to-transparent backdrop-blur-xl border border-primary/20 rounded-showcase shadow-2xl shadow-primary/20 ${
-              isMobile ? 'w-48 h-48' : 'w-80 h-80'
+              isMobile ? 'w-40 sm:w-48 h-40 sm:h-48' : 'w-64 lg:w-80 h-64 lg:h-80'
             }`}
             animate={mobileVariants.centralShape.animate}
             transition={mobileVariants.centralShape.transition}
@@ -107,21 +107,21 @@ export default function HeroVisual() {
           >
             {/* Inner glow effect */}
             <div className={`absolute bg-gradient-to-br from-primary/30 to-transparent rounded-feature blur-xl ${
-              isMobile ? 'inset-2' : 'inset-4'
+              isMobile ? 'inset-1 sm:inset-2' : 'inset-3 lg:inset-4'
             }`} />
             
             {/* Digital acceleration icon representation */}
             <div className="absolute inset-0 flex items-center justify-center">
               <motion.div
                 className={`bg-gradient-to-br from-primary to-primary/60 rounded-feature flex items-center justify-center shadow-luxury ${
-                  isMobile ? 'w-20 h-20' : 'w-32 h-32'
+                  isMobile ? 'w-16 sm:w-20 h-16 sm:h-20' : 'w-24 lg:w-32 h-24 lg:h-32'
                 }`}
                 animate={mobileVariants.innerElement.animate}
                 transition={mobileVariants.innerElement.transition}
               >
                 <motion.div
                   className={`bg-background rounded-card flex items-center justify-center ${
-                    isMobile ? 'w-10 h-10' : 'w-16 h-16'
+                    isMobile ? 'w-8 sm:w-10 h-8 sm:h-10' : 'w-12 lg:w-16 h-12 lg:h-16'
                   }`}
                   animate={!isMobile ? {
                     rotate: [0, -360],
@@ -133,7 +133,7 @@ export default function HeroVisual() {
                   } : {}}
                 >
                   <div className={`bg-gradient-to-br from-primary to-primary/80 rounded-element ${
-                    isMobile ? 'w-5 h-5' : 'w-8 h-8'
+                    isMobile ? 'w-4 sm:w-5 h-4 sm:h-5' : 'w-6 lg:w-8 h-6 lg:h-8'
                   }`} />
                 </motion.div>
               </motion.div>
@@ -146,11 +146,11 @@ export default function HeroVisual() {
           <motion.div
             key={i}
             className={`absolute bg-gradient-to-br from-primary/30 to-primary/10 backdrop-blur-xl border border-primary/20 rounded-card shadow-lg ${
-              isMobile ? 'w-10 h-10' : 'w-16 h-16'
+              isMobile ? 'w-8 sm:w-10 h-8 sm:h-10' : 'w-12 lg:w-16 h-12 lg:h-16'
             }`}
             style={{
-              left: isMobile ? `${30 + (i * 20)}%` : `${20 + (i * 12)}%`,
-              top: isMobile ? `${40 + (i % 2) * 20}%` : `${30 + (i % 2) * 40}%`,
+              left: isMobile ? `${25 + (i * 25)}%` : `${20 + (i * 12)}%`,
+              top: isMobile ? `${35 + (i % 2) * 30}%` : `${30 + (i % 2) * 40}%`,
             }}
             animate={mobileVariants.satellite(i).animate}
             transition={mobileVariants.satellite(i).transition}
@@ -205,7 +205,7 @@ export default function HeroVisual() {
         {/* Ambient light effects - Simplified on mobile */}
         <motion.div
           className={`absolute bg-primary/10 rounded-full blur-3xl ${
-            isMobile ? 'w-48 h-48 top-1/3 left-1/3' : 'w-96 h-96 top-1/4 left-1/4'
+            isMobile ? 'w-32 sm:w-48 h-32 sm:h-48 top-1/3 left-1/3' : 'w-64 lg:w-96 h-64 lg:h-96 top-1/4 left-1/4'
           }`}
           animate={{
             scale: [1, 1.3, 1],
@@ -220,7 +220,7 @@ export default function HeroVisual() {
         
         {!isMobile && (
           <motion.div
-            className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/8 rounded-full blur-3xl"
+            className="absolute bottom-1/4 right-1/4 w-64 lg:w-80 h-64 lg:h-80 bg-primary/8 rounded-full blur-3xl"
             animate={{
               scale: [1.2, 1, 1.2],
               opacity: [0.2, 0.5, 0.2],
