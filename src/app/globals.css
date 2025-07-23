@@ -2,7 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Critical CSS for above-the-fold content */
 @layer base {
+  /* Critical typography and layout */
+  html {
+    font-feature-settings: "cv11", "ss01";
+    font-variation-settings: "opsz" 32;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Critical performance hints */
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Reduce layout shifts */
+  img, video, iframe {
+    height: auto;
+    max-width: 100%;
+  }
+
+  /* Critical loading states */
+  .loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  @keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Critical navigation styles */
+  .nav-visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  .nav-hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -48,55 +96,38 @@
   .dark {
     --background: 228 3% 5%; /* near #0D0E0E */
     --foreground: 210 17% 95%; /* rgb(247, 248, 248) */
-    --card: 228 3% 5%;
+    --card: 229 3% 7%; /* #111213 */
     --card-foreground: 210 17% 95%;
-    --popover: 228 3% 5%;
+    --popover: 229 3% 7%;
     --popover-foreground: 210 17% 95%;
-    --primary: 210 17% 95%; /* rgb(247, 248, 248) */
-    --primary-foreground: 228 3% 5%; /* near #0D0E0E */
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 210 17% 95%;
+    --primary: 220 25% 80%; /* #c9d2e7 */
+    --primary-foreground: 228 3% 5%;
+    --secondary: 229 3% 7%;
+    --secondary-foreground: 210 17% 95%;
+    --muted: 229 3% 7%;
+    --muted-foreground: 215 13% 65%;
+    --accent: 229 3% 7%;
+    --accent-foreground: 210 17% 95%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 17% 95%;
+    --border: 229 3% 12%; /* #1a1c1e */
+    --input: 229 3% 12%;
+    --ring: 220 25% 80%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  /* Responsive container padding */
-  @media (max-width: 475px) {
-    :root {
-      --container-padding: var(--container-padding-xs);
-    }
-  }
-
-  @media (max-width: 768px) {
-    :root {
-      --container-padding: var(--container-padding-sm);
-    }
-  }
-
-  @media (min-width: 1536px) {
-    :root {
-      --container-padding: var(--container-padding-lg);
-    }
+    
+    /* Dark mode sidebar variables */
+    --sidebar-background: 228 3% 5%;
+    --sidebar-foreground: 210 17% 95%;
+    --sidebar-primary: 220 25% 80%;
+    --sidebar-primary-foreground: 228 3% 5%;
+    --sidebar-accent: 229 3% 7%;
+    --sidebar-accent-foreground: 210 17% 95%;
+    --sidebar-border: 229 3% 12%;
+    --sidebar-ring: 220 25% 80%;
   }
 }
 
@@ -104,121 +135,177 @@
   * {
     @apply border-border;
   }
+  
   body {
     @apply bg-background text-foreground;
-    overflow-x: hidden;
-    font-smoothing: antialiased;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
   
-  /* Enhanced scrollbar styling */
-  ::-webkit-scrollbar {
-    width: 8px;
+  /* Critical animation foundations */
+  [data-visible="false"] {
+    opacity: 0;
+    transform: translateY(1rem);
   }
   
-  ::-webkit-scrollbar-track {
-    background: hsl(var(--background));
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: hsl(var(--primary) / 0.3);
-    border-radius: 10px;
-    transition: background 0.2s ease;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--primary) / 0.5);
+  [data-visible="true"] {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
   }
 
-  /* Custom utilities for consistent design system */
-  .container-responsive {
-    padding-left: var(--container-padding);
-    padding-right: var(--container-padding);
+  /* Performance-optimized animations */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
   }
 
-  /* Improved text rendering for small screens */
-  @media (max-width: 768px) {
-    body {
-      text-rendering: optimizeLegibility;
-      -webkit-text-size-adjust: 100%;
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(2rem);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes scaleIn {
+    from { 
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to { 
+      opacity: 1;
+      transform: scale(1);
     }
   }
 }
 
 @layer components {
-  /* Consistent shadow system */
+  /* Critical design system utilities */
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: var(--container-padding-xs);
+    padding-right: var(--container-padding-xs);
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: var(--container-padding-sm);
+      padding-right: var(--container-padding-sm);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      padding-left: var(--container-padding);
+      padding-right: var(--container-padding);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: var(--container-padding-lg);
+      padding-right: var(--container-padding-lg);
+    }
+  }
+
+  /* Critical spacing utilities */
+  .px-container {
+    padding-left: var(--container-padding-xs);
+    padding-right: var(--container-padding-xs);
+  }
+
+  @media (min-width: 640px) {
+    .px-container {
+      padding-left: var(--container-padding-sm);
+      padding-right: var(--container-padding-sm);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .px-container {
+      padding-left: var(--container-padding);
+      padding-right: var(--container-padding);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .px-container {
+      padding-left: var(--container-padding-lg);
+      padding-right: var(--container-padding-lg);
+    }
+  }
+
+  /* Section spacing utilities */
+  .py-section {
+    padding-top: 4rem; /* 64px */
+    padding-bottom: 4rem;
+  }
+
+  .py-section-compact {
+    padding-top: 3rem; /* 48px */
+    padding-bottom: 3rem;
+  }
+
+  .py-section-large {
+    padding-top: 6rem; /* 96px */
+    padding-bottom: 6rem;
+  }
+
+  @media (min-width: 768px) {
+    .py-section {
+      padding-top: 5rem; /* 80px */
+      padding-bottom: 5rem;
+    }
+
+    .py-section-compact {
+      padding-top: 4rem; /* 64px */
+      padding-bottom: 4rem;
+    }
+
+    .py-section-large {
+      padding-top: 8rem; /* 128px */
+      padding-bottom: 8rem;
+    }
+  }
+
+  /* Enhanced visual utilities */
+  .rounded-element {
+    border-radius: calc(var(--radius) + 2px);
+  }
+
+  .rounded-feature {
+    border-radius: calc(var(--radius) * 2);
+  }
+
+  .rounded-showcase {
+    border-radius: calc(var(--radius) * 4);
+  }
+
+  /* Shadow system */
   .shadow-luxury {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   }
-  
+
   .shadow-luxury-lg {
-    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
 
-  /* Consistent glassmorphism effects */
-  .glass-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .glass-button {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  /* Mobile-optimized touch targets */
-  @media (max-width: 768px) {
-    .touch-target {
-      min-height: 44px;
-      min-width: 44px;
-    }
-  }
-}
-
-@layer utilities {
-  /* Text selection styling */
-  ::selection {
-    background-color: hsl(var(--primary) / 0.2);
-    color: hsl(var(--primary-foreground));
-  }
-
-  /* Focus visible improvements */
-  .focus-visible\:ring-luxury:focus-visible {
-    outline: none;
-    ring: 2px solid hsl(var(--primary));
-    ring-offset: 2px;
-    ring-offset-color: hsl(var(--background));
-  }
-
-  /* Animation performance improvements */
-  .will-change-transform {
-    will-change: transform;
-  }
-
-  .will-change-opacity {
-    will-change: opacity;
-  }
-
-  /* Preserve 3D animations for hero visual */
-  .preserve-3d {
-    transform-style: preserve-3d;
-  }
-
-  /* Performance-optimized animations for mobile */
-  @media (prefers-reduced-motion: reduce) {
-    .motion-reduce\:animate-none {
-      animation: none;
-    }
-    
-    .motion-reduce\:transform-none {
-      transform: none !important;
-    }
-  }
-
-  /* Responsive text utilities */
+  /* Typography enhancements */
   .text-responsive-xs { font-size: clamp(0.75rem, 2vw, 0.875rem); }
   .text-responsive-sm { font-size: clamp(0.875rem, 2.5vw, 1rem); }
   .text-responsive-base { font-size: clamp(1rem, 3vw, 1.125rem); }
@@ -229,20 +316,38 @@
   .text-responsive-4xl { font-size: clamp(2.5rem, 8vw, 4rem); }
 }
 
-/* Design System Migration Guide (for reference - remove in production) */
-/*
-SPACING MIGRATION:
-- py-32 → py-section-large (preserves 128px)
-- py-20 → py-section (preserves 80px)  
-- py-16 → py-section-compact (preserves 64px)
+/* Performance optimizations */
+@layer utilities {
+  /* GPU acceleration for animations */
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-opacity {
+    will-change: opacity;
+  }
+  
+  .will-change-auto {
+    will-change: auto;
+  }
 
-BORDER RADIUS MIGRATION:
-- rounded-3xl → rounded-showcase (preserves 32px)
-- rounded-2xl → rounded-feature (preserves 24px)
-- rounded-xl → rounded-card (preserves 16px)
-- rounded-lg → rounded-element (preserves 12px)
+  /* Contain layout for performance */
+  .contain-layout {
+    contain: layout;
+  }
+  
+  .contain-strict {
+    contain: strict;
+  }
 
-CONTAINER PADDING:
-- px-8 → px-container (responsive: 24px mobile, 32px desktop, 48px xl)
-- px-6 → px-container-sm (24px)
-*/
+  /* Critical responsive utilities */
+  .h-screen-safe {
+    height: 100vh;
+    height: 100dvh;
+  }
+  
+  .min-h-screen-safe {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+}

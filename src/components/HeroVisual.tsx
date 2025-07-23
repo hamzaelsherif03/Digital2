@@ -1,239 +1,193 @@
-import { motion } from 'framer-motion';
+"use client";
+
 import { useMobile } from './hooks/use-mobile';
+import { cn } from './lib/utils';
+import { useEffect, useRef } from 'react';
 
 export default function HeroVisual() {
   const isMobile = useMobile();
+  const containerRef = useRef<HTMLDivElement>(null);
   
-  // Mobile-optimized animation variants
-  const mobileVariants = {
-    // Simplified 3D animations for mobile
-    centralShape: {
-      animate: isMobile ? {
-        scale: [1, 1.05, 1],
-        opacity: [0.8, 1, 0.8],
-      } : {
-        rotateY: [0, 360],
-        rotateX: [0, 15, 0, -15, 0],
-      },
-      transition: isMobile ? {
-        scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-        opacity: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-      } : {
-        rotateY: { duration: 20, repeat: Infinity, ease: "linear" },
-        rotateX: { duration: 8, repeat: Infinity, ease: "easeInOut" },
-      }
-    },
-    
-    // Simplified inner element animations
-    innerElement: {
-      animate: isMobile ? {
-        scale: [1, 1.1, 1],
-      } : {
-        scale: [1, 1.1, 1],
-        rotate: [0, 180, 360],
-      },
-      transition: isMobile ? {
-        scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-      } : {
-        scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-        rotate: { duration: 12, repeat: Infinity, ease: "linear" },
-      }
-    },
-    
-    // Simplified satellite animations
-    satellite: (i: number) => ({
-      animate: isMobile ? {
-        y: [0, -10, 0],
-        scale: [1, 1.1, 1],
-      } : {
-        y: [0, -20, 0],
-        rotate: [0, 360],
-        scale: [1, 1.2, 1],
-      },
-      transition: isMobile ? {
-        y: { duration: 2 + i * 0.3, repeat: Infinity, ease: "easeInOut" },
-        scale: { duration: 3 + i * 0.2, repeat: Infinity, ease: "easeInOut" },
-        delay: i * 0.3,
-      } : {
-        y: { duration: 3 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
-        rotate: { duration: 10 + i * 2, repeat: Infinity, ease: "linear" },
-        scale: { duration: 4 + i * 0.3, repeat: Infinity, ease: "easeInOut" },
-        delay: i * 0.5,
-      }
-    }),
-    
-    // Simplified particle animations
-    particle: (i: number) => ({
-      animate: isMobile ? {
-        y: [0, -50, 0],
-        opacity: [0, 0.8, 0],
-      } : {
-        y: [0, -100, 0],
-        opacity: [0, 1, 0],
-        scale: [0, 1, 0],
-      },
-      transition: isMobile ? {
-        duration: 2 + Math.random() * 1,
-        repeat: Infinity,
-        delay: Math.random() * 2,
-        ease: "easeInOut",
-      } : {
-        duration: 3 + Math.random() * 2,
-        repeat: Infinity,
-        delay: Math.random() * 3,
-        ease: "easeInOut",
-      }
-    })
-  };
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.setAttribute('data-visible', 'true');
+    }
+  }, []);
   
   return (
     <div className="relative w-full flex justify-center mt-6 sm:mt-8 md:mt-12 lg:mt-16 mb-6 sm:mb-8 md:mb-12 lg:mb-16">
-      <div className={`w-full max-w-6xl relative ${isMobile ? 'h-[250px] sm:h-[300px]' : 'h-[400px] lg:h-[500px]'} perspective-2000`}>
+      <div 
+        ref={containerRef}
+        className={cn(
+          "w-full max-w-6xl relative perspective-2000 opacity-0 transition-opacity duration-1000 data-[visible=true]:opacity-100",
+          isMobile ? 'h-[250px] sm:h-[300px]' : 'h-[400px] lg:h-[500px]'
+        )}
+      >
         {/* Main floating geometric shape */}
-        <motion.div
-          className="absolute inset-0 flex items-center justify-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {/* Central hexagon with glassmorphism - Mobile Optimized */}
-          <motion.div
-            className={`relative bg-gradient-to-br from-primary/20 via-primary/10 to-transparent backdrop-blur-xl border border-primary/20 rounded-showcase shadow-2xl shadow-primary/20 ${
-              isMobile ? 'w-40 sm:w-48 h-40 sm:h-48' : 'w-64 lg:w-80 h-64 lg:h-80'
-            }`}
-            animate={mobileVariants.centralShape.animate}
-            transition={mobileVariants.centralShape.transition}
-            style={!isMobile ? { transformStyle: "preserve-3d" } : {}}
-          >
-            {/* Inner glow effect */}
-            <div className={`absolute bg-gradient-to-br from-primary/30 to-transparent rounded-feature blur-xl ${
-              isMobile ? 'inset-1 sm:inset-2' : 'inset-3 lg:inset-4'
-            }`} />
+        <div className="absolute inset-0 flex items-center justify-center">
+          
+          {/* Central hexagon with glassmorphism - Optimized */}
+          <div className={cn(
+            "relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56",
+            "bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5",
+            "backdrop-blur-xl rounded-3xl border border-primary/30",
+            "shadow-2xl transform-gpu will-change-transform",
+            "animate-pulse"
+          )}
+          style={{
+            animation: isMobile 
+              ? 'floatMobile 4s ease-in-out infinite'
+              : 'float3D 20s linear infinite, bobbing 8s ease-in-out infinite'
+          }}>
             
-            {/* Digital acceleration icon representation */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div
-                className={`bg-gradient-to-br from-primary to-primary/60 rounded-feature flex items-center justify-center shadow-luxury ${
-                  isMobile ? 'w-16 sm:w-20 h-16 sm:h-20' : 'w-24 lg:w-32 h-24 lg:h-32'
-                }`}
-                animate={mobileVariants.innerElement.animate}
-                transition={mobileVariants.innerElement.transition}
-              >
-                <motion.div
-                  className={`bg-background rounded-card flex items-center justify-center ${
-                    isMobile ? 'w-8 sm:w-10 h-8 sm:h-10' : 'w-12 lg:w-16 h-12 lg:h-16'
-                  }`}
-                  animate={!isMobile ? {
-                    rotate: [0, -360],
-                  } : {}}
-                  transition={!isMobile ? {
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: "linear",
-                  } : {}}
-                >
-                  <div className={`bg-gradient-to-br from-primary to-primary/80 rounded-element ${
-                    isMobile ? 'w-4 sm:w-5 h-4 sm:h-5' : 'w-6 lg:w-8 h-6 lg:h-8'
-                  }`} />
-                </motion.div>
-              </motion.div>
+            {/* Inner rotating element - Simplified */}
+            <div className={cn(
+              "absolute inset-4 sm:inset-6 rounded-2xl",
+              "bg-gradient-to-tr from-primary/30 to-primary/10",
+              "border border-primary/40 backdrop-blur-sm",
+              "transform-gpu will-change-transform"
+            )}
+            style={{
+              animation: isMobile 
+                ? 'innerRotateMobile 3s ease-in-out infinite'
+                : 'innerRotate 12s linear infinite, scale 4s ease-in-out infinite'
+            }}>
+              
+              {/* Core light effect */}
+              <div className="absolute inset-2 rounded-xl bg-primary/20 animate-pulse" 
+                   style={{ animationDuration: '2s' }} />
             </div>
-          </motion.div>
-        </motion.div>
+            
+            {/* Floating accent elements */}
+            <div className="absolute -top-2 -right-2 w-4 h-4 bg-primary/60 rounded-full animate-bounce" 
+                 style={{ animationDelay: '0s', animationDuration: '2s' }} />
+            <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-primary/40 rounded-full animate-bounce" 
+                 style={{ animationDelay: '0.5s', animationDuration: '2.5s' }} />
+          </div>
 
-        {/* Floating satellite elements - Reduced count on mobile */}
-        {[...Array(isMobile ? 3 : 6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className={`absolute bg-gradient-to-br from-primary/30 to-primary/10 backdrop-blur-xl border border-primary/20 rounded-card shadow-lg ${
-              isMobile ? 'w-8 sm:w-10 h-8 sm:h-10' : 'w-12 lg:w-16 h-12 lg:h-16'
-            }`}
-            style={{
-              left: isMobile ? `${25 + (i * 25)}%` : `${20 + (i * 12)}%`,
-              top: isMobile ? `${35 + (i % 2) * 30}%` : `${30 + (i % 2) * 40}%`,
-            }}
-            animate={mobileVariants.satellite(i).animate}
-            transition={mobileVariants.satellite(i).transition}
-          >
-            <div className={`w-full h-full bg-gradient-to-br from-primary/40 to-transparent rounded-card blur-sm ${
-              isMobile ? 'opacity-60' : 'opacity-100'
-            }`} />
-          </motion.div>
-        ))}
+          {/* Satellite elements - Simplified */}
+          {[...Array(isMobile ? 3 : 6)].map((_, i) => {
+            const angle = (360 / (isMobile ? 3 : 6)) * i;
+            const radius = isMobile ? 80 : 120;
+            const x = Math.cos((angle * Math.PI) / 180) * radius;
+            const y = Math.sin((angle * Math.PI) / 180) * radius;
+            
+            return (
+              <div
+                key={i}
+                className={cn(
+                  "absolute w-6 h-6 sm:w-8 sm:h-8 rounded-full",
+                  "bg-gradient-to-br from-primary/40 to-primary/20",
+                  "border border-primary/50 backdrop-blur-sm",
+                  "transform-gpu will-change-transform"
+                )}
+                style={{
+                  left: `calc(50% + ${x}px)`,
+                  top: `calc(50% + ${y}px)`,
+                  animation: `satellite${i} ${3 + i * 0.5}s ease-in-out infinite`,
+                  animationDelay: `${i * 0.3}s`
+                }}
+              />
+            );
+          })}
 
-        {/* Background grid pattern - Simplified on mobile */}
-        {!isMobile && (
-          <motion.div
-            className="absolute inset-0 opacity-20"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.2 }}
-            transition={{ duration: 2, delay: 0.5 }}
-          >
-            <svg className="w-full h-full" viewBox="0 0 100 100" fill="none">
-              <defs>
-                <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                  <path
-                    d="M 10 0 L 0 0 0 10"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="0.5"
-                    className="text-primary/30"
-                  />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-            </svg>
-          </motion.div>
-        )}
+          {/* Ambient particles - Ultra simplified */}
+          {!isMobile && [...Array(8)].map((_, i) => (
+            <div
+              key={`particle-${i}`}
+              className="absolute w-1 h-1 bg-primary/30 rounded-full"
+              style={{
+                left: `${20 + Math.random() * 60}%`,
+                top: `${20 + Math.random() * 60}%`,
+                animation: `particle ${2 + Math.random() * 1}s ease-in-out infinite`,
+                animationDelay: `${Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
 
-        {/* Particle effects - Reduced count and complexity on mobile */}
-        {[...Array(isMobile ? 6 : 12)].map((_, i) => (
-          <motion.div
-            key={`particle-${i}`}
-            className={`absolute bg-primary/60 rounded-full ${
-              isMobile ? 'w-1 h-1' : 'w-2 h-2'
-            }`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={mobileVariants.particle(i).animate}
-            transition={mobileVariants.particle(i).transition}
-          />
-        ))}
-
-        {/* Ambient light effects - Simplified on mobile */}
-        <motion.div
-          className={`absolute bg-primary/10 rounded-full blur-3xl ${
-            isMobile ? 'w-32 sm:w-48 h-32 sm:h-48 top-1/3 left-1/3' : 'w-64 lg:w-96 h-64 lg:h-96 top-1/4 left-1/4'
-          }`}
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: isMobile ? 4 : 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        
-        {!isMobile && (
-          <motion.div
-            className="absolute bottom-1/4 right-1/4 w-64 lg:w-80 h-64 lg:h-80 bg-primary/8 rounded-full blur-3xl"
-            animate={{
-              scale: [1.2, 1, 1.2],
-              opacity: [0.2, 0.5, 0.2],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-          />
-        )}
+        {/* Background gradient effect */}
+        <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent opacity-60" />
       </div>
+
+      {/* CSS Animations */}
+      <style jsx>{`
+        @keyframes float3D {
+          0%, 100% { transform: rotateY(0deg) rotateX(0deg); }
+          25% { transform: rotateY(90deg) rotateX(5deg); }
+          50% { transform: rotateY(180deg) rotateX(0deg); }
+          75% { transform: rotateY(270deg) rotateX(-5deg); }
+        }
+        
+        @keyframes floatMobile {
+          0%, 100% { transform: scale(1) translateY(0px); }
+          50% { transform: scale(1.05) translateY(-5px); }
+        }
+        
+        @keyframes bobbing {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes innerRotate {
+          0% { transform: rotate(0deg) scale(1); }
+          50% { transform: rotate(180deg) scale(1.1); }
+          100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        @keyframes innerRotateMobile {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.1); }
+        }
+        
+        @keyframes scale {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.1); }
+        }
+        
+        @keyframes satellite0 {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-10px) scale(1.1); }
+        }
+        
+        @keyframes satellite1 {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-15px) scale(1.2); }
+        }
+        
+        @keyframes satellite2 {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-8px) scale(1.05); }
+        }
+        
+        @keyframes satellite3 {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-12px) scale(1.15); }
+        }
+        
+        @keyframes satellite4 {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-18px) scale(1.25); }
+        }
+        
+        @keyframes satellite5 {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-6px) scale(1.08); }
+        }
+        
+        @keyframes particle {
+          0%, 100% { opacity: 0; transform: translateY(0px) scale(0); }
+          50% { opacity: 0.8; transform: translateY(-30px) scale(1); }
+        }
+        
+        .perspective-2000 {
+          perspective: 2000px;
+        }
+        
+        .bg-gradient-radial {
+          background: radial-gradient(circle at center, var(--tw-gradient-from), var(--tw-gradient-to));
+        }
+      `}</style>
     </div>
   );
 }
