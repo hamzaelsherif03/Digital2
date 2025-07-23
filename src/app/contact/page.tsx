@@ -1,8 +1,8 @@
 import { contactMetadata } from '@/lib/metadata';
-import ContactForm from './ContactForm';
+import ContactPageClient from './ContactPageClient';
 
 export const metadata = contactMetadata;
 
 export default function ContactPage() {
-  return <ContactForm />;
+  return <ContactPageClient />;
 } 
