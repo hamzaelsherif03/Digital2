@@ -1,9 +1,10 @@
 "use client";
 
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronRight, Home } from 'lucide-react';
+import { cn, animationClasses } from './lib/utils';
+import { useEffect, useRef } from 'react';
 
 interface BreadcrumbItem {
   label: string;
@@ -18,30 +19,40 @@ interface BreadcrumbProps {
 
 export default function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
   const pathname = usePathname();
+  const navRef = useRef<HTMLElement>(null);
   
   // Auto-generate breadcrumbs if not provided
   const breadcrumbItems = items || generateBreadcrumbs(pathname);
+
+  useEffect(() => {
+    if (navRef.current) {
+      navRef.current.setAttribute('data-visible', 'true');
+    }
+  }, []);
 
   if (breadcrumbItems.length <= 1) {
     return null; // Don't show breadcrumbs for home page
   }
 
   return (
-    <motion.nav
-      className={`py-4 ${className}`}
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+    <nav
+      ref={navRef}
+      className={cn(
+        "py-4",
+        animationClasses.fadeInUp,
+        className
+      )}
       aria-label="Breadcrumb navigation"
     >
       <ol className="flex items-center space-x-2 text-sm">
         {breadcrumbItems.map((item, index) => (
-          <motion.li
+          <li
             key={item.href}
-            className="flex items-center"
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.1, duration: 0.3 }}
+            className={cn(
+              "flex items-center",
+              animationClasses.slideInLeft
+            )}
+            style={{ animationDelay: `${index * 100}ms` }}
           >
             {/* Separator */}
             {index > 0 && (
@@ -66,10 +77,10 @@ export default function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
                 <span className="font-medium">{item.label}</span>
               </Link>
             )}
-          </motion.li>
+          </li>
         ))}
       </ol>
-    </motion.nav>
+    </nav>
   );
 }
 

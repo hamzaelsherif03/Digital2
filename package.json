@@ -7,9 +7,13 @@
         "genkit:dev": "genkit start -- tsx src/ai/dev.ts",
         "genkit:watch": "genkit start -- tsx --watch src/ai/dev.ts",
         "build": "next build",
+        "build:analyze": "ANALYZE=true npm run build",
+        "build:profile": "next build --profile",
         "start": "next start",
         "lint": "next lint",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --noEmit",
+        "optimize:images": "npx next-optimized-images",
+        "perf:audit": "npm run build && npx next-bundle-analyzer"
     },
     "dependencies": {
         "@genkit-ai/googleai": "^1.13.0",
@@ -61,11 +65,13 @@
         "recharts": "^2.15.1",
         "rehype-highlight": "^7.0.2",
         "remark-gfm": "^4.0.1",
-        "tailwind-merge": "^3.0.1",
-        "tailwindcss-animate": "^1.0.7",
-        "zod": "^3.24.2"
+            "tailwind-merge": "^3.0.1",
+    "tailwindcss-animate": "^1.0.7",
+    "web-vitals": "^4.2.4",
+    "zod": "^3.24.2"
     },
     "devDependencies": {
+        "@next/bundle-analyzer": "^15.3.3",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",

@@ -1,10 +1,10 @@
 "use client";
 
-import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
-import { useAnimationVariants } from './lib/utils';
+import { cn, animationClasses } from './lib/utils';
 import { Users, DollarSign, TrendingUp, Shield, Zap, ArrowRight } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 
 const affiliateBenefits = [
   {
@@ -30,133 +30,152 @@ const affiliateBenefits = [
 ];
 
 export default function AffiliateSection() {
-  const { fadeInUp, staggerContainer } = useAnimationVariants();
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.setAttribute('data-visible', 'true');
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
   
   return (
-    <section className="py-section bg-white/5">
+    <section ref={sectionRef} className="py-section bg-white/5">
       <div className="container mx-auto px-container">
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={staggerContainer}
-          className="text-center max-w-4xl mx-auto mb-20"
-        >
-          <motion.div
-            variants={fadeInUp}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium text-primary mb-4"
+        <div className={cn(
+          "text-center max-w-4xl mx-auto mb-20",
+          animationClasses.fadeInUp
+        )}>
+          <div
+            className={cn(
+              "inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium text-primary mb-4",
+              animationClasses.scaleIn
+            )}
+            style={{ animationDelay: '0ms' }}
           >
             <Zap className="w-4 h-4" />
             Partner Program
-          </motion.div>
+          </div>
           
-          <motion.h2
-            variants={fadeInUp}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold font-headline mb-8 tracking-tight"
+          <h2
+            className={cn(
+              "text-4xl md:text-6xl lg:text-7xl font-bold font-headline mb-8 tracking-tight",
+              animationClasses.fadeInUp
+            )}
+            style={{ animationDelay: '100ms' }}
           >
             Join Our
             <span className="block bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent">
               Affiliate Network
             </span>
-          </motion.h2>
+          </h2>
           
-          <motion.p
-            variants={fadeInUp}
-            className="text-xl md:text-2xl text-foreground/70 leading-relaxed"
+          <p
+            className={cn(
+              "text-xl md:text-2xl text-foreground/70 leading-relaxed",
+              animationClasses.fadeInUp
+            )}
+            style={{ animationDelay: '200ms' }}
           >
             Partner with us and earn competitive commissions while helping businesses accelerate their digital transformation.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* Benefits Grid */}
-        <motion.div
-          variants={staggerContainer}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20"
-        >
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           {affiliateBenefits.map((benefit, index) => (
-            <motion.div
+            <div
               key={benefit.title}
-              variants={fadeInUp}
-              custom={index}
-              className="group"
+              className={cn(
+                animationClasses.fadeInUp,
+                animationClasses.hoverScale
+              )}
+              style={{ animationDelay: `${300 + index * 100}ms` }}
             >
-              <Card className="relative h-full p-8 bg-gradient-to-br from-background/80 via-background/60 to-background/40 backdrop-blur-2xl border border-primary/20 shadow-2xl hover:shadow-luxury transition-all duration-500 hover:scale-105 rounded-feature overflow-hidden">
-                {/* Background gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                
-                {/* Content */}
-                <div className="relative z-10 text-center">
-                  {/* Icon */}
-                  <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/10 backdrop-blur-xl border border-primary/30 rounded-feature flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-luxury transition-all duration-500">
-                    {benefit.icon}
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-xl font-bold font-headline mb-4 text-foreground group-hover:text-primary transition-colors duration-500">
-                    {benefit.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-foreground/70 leading-relaxed">
-                    {benefit.description}
-                  </p>
+              <Card className="p-8 text-center hover:shadow-lg transition-all duration-300 bg-background/50 backdrop-blur border-primary/10 hover:border-primary/20">
+                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
+                  {benefit.icon}
                 </div>
-
-                {/* Hover border effect */}
-                <div className="absolute inset-0 rounded-feature bg-gradient-to-r from-primary/20 via-transparent to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                <h3 className="text-xl font-bold mb-4 text-foreground">
+                  {benefit.title}
+                </h3>
+                <p className="text-foreground/70 leading-relaxed">
+                  {benefit.description}
+                </p>
               </Card>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* CTA Section */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={staggerContainer}
-          className="text-center bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 rounded-showcase p-12 backdrop-blur-xl border border-primary/20 shadow-2xl"
+        <div
+          className={cn(
+            "text-center",
+            animationClasses.fadeInUp
+          )}
+          style={{ animationDelay: '700ms' }}
         >
-          <motion.h3
-            variants={fadeInUp}
-            className="text-3xl md:text-4xl font-bold font-headline mb-6"
+          <h3
+            className={cn(
+              "text-3xl md:text-4xl font-bold font-headline mb-6",
+              animationClasses.fadeInUp
+            )}
+            style={{ animationDelay: '800ms' }}
           >
-            Ready to Start
-            <span className="block bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent">
-              Earning?
-            </span>
-          </motion.h3>
+            Ready to Start Earning?
+          </h3>
           
-          <motion.p
-            variants={fadeInUp}
-            className="text-xl text-foreground/70 mb-8 max-w-2xl mx-auto"
+          <p
+            className={cn(
+              "text-lg text-foreground/70 mb-8 max-w-2xl mx-auto",
+              animationClasses.fadeInUp
+            )}
+            style={{ animationDelay: '900ms' }}
           >
-            Join our affiliate program today and start earning competitive commissions while helping businesses grow.
-          </motion.p>
-
-          <motion.div
-            variants={fadeInUp}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6"
+            Join thousands of successful partners who are already earning with our affiliate program.
+          </p>
+          
+          <div
+            className={cn(
+              "flex flex-col sm:flex-row gap-4 justify-center",
+              animationClasses.fadeInUp
+            )}
+            style={{ animationDelay: '1000ms' }}
           >
             <Button 
               size="lg" 
-              className="group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold" 
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105"
               asChild
             >
-              <a href="/affiliate" className="flex items-center gap-4">
+              <a href="/affiliate" className="flex items-center gap-2">
                 <span>Apply Now</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                <ArrowRight className="w-5 h-5" />
               </a>
             </Button>
             
-            <a 
-              href="/contact?utm_source=website&utm_medium=cta&utm_campaign=conversion&utm_content=affiliate-info"
-              className="group px-8 py-4 text-lg font-medium rounded-full hover:bg-primary/5 transition-all duration-300 border border-primary/20 backdrop-blur-xl"
+            <Button 
+              size="lg" 
+              variant="outline"
+              className="border-primary/30 hover:border-primary text-primary hover:bg-primary/10 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105"
+              asChild
             >
-              Learn More
-            </a>
-          </motion.div>
-        </motion.div>
+              <a href="/contact">
+                Learn More
+              </a>
+            </Button>
+          </div>
+        </div>
       </div>
     </section>
   );
